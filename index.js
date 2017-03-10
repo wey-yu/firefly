@@ -1,0 +1,46 @@
+const ServicesChecker = require('firefly-server').ServicesChecker
+
+const Db = require('firefly-core-libs').MemDb
+const discoveryServer = require('firefly-server').httpServer
+
+let db = new Db()
+
+db.initialize().then((dbCli) => {
+
+  const httpPort = process.env.PORT || 8080;
+  const informations = process.env.INFORMATIONS || "discoveryServerID: 0002"
+
+  let checkCredentials = (credential) => {
+    const serverCredentials = process.env.SERVER_CREDENTIALS || 'firefly';
+    return new Promise((resolve, reject) => {
+      credential===serverCredentials ? resolve("Hello you!") : reject("bad credentials")
+    })
+  }
+
+  discoveryServer({dbCli, httpPort, checkCredentials})
+    .then((server) => {
+      // you can add routes to the server
+      server.get(`/informations`, (req, res) => {
+        res.send({informations})
+      });     
+
+      let servicesCheker = new ServicesChecker({id:"checker", delay: 5000, dbCli: dbCli})
+      servicesCheker.start({task: "check"})
+
+      servicesCheker.on('error', (discoveryError) => {
+        discoveryError.case({
+          BadKeyService: (message) => console.log("⚠️ ===> ", message),
+          ServiceUnreachable: (message) => console.log("⚠️ ===> ", message),
+          UnableToDeleteService: (message) => console.log("⚠️ ===> ", message),
+          SomethingBadWithService: (message) => console.log("⚠️ ===> ", message)
+        })
+      })
+
+      server.listen(httpPort);
+      console.log(`🌍 🐝 firefly is started - listening on ${httpPort}`);
+    })
+
+}).catch(error => {
+  //console.log(`😡: ${error.message()}`)
+})
+

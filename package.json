@@ -1,0 +1,29 @@
+{
+  "name": "firefly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha tests/**",
+    "doc": "WIP",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wey-yu/firefly.git"
+  },
+  "keywords": [],
+  "author": "@k33g_org",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wey-yu/firefly/issues"
+  },
+  "homepage": "https://github.com/wey-yu/firefly#readme",
+  "dependencies": {
+    "firefly-server": "git+https://github.com/thespacefirefly/firefly-server.git"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  }
+}
