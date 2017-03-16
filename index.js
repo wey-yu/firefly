@@ -1,13 +1,13 @@
 const ServicesChecker = require('firefly-server').ServicesChecker
 
-//const Db = require('firefly-core-libs').MemDb
-const Db = require('firefly-redis-connector').RedisDb
+const Db = require('firefly-core-libs').MemDb
+//const Db = require('firefly-redis-connector').RedisDb
 const discoveryServer = require('firefly-server').httpServer
 
-let url = process.env.REDIS_URL || "redis://localhost:6379"
+//let url = process.env.REDIS_URL || "redis://localhost:6379"
+//let db = new Db({url})
 
-let db = new Db({url})
-//let db = new Db()
+let db = new Db()
 
 db.initialize().then((dbCli) => {
   dbCli.on('error', (error) => {
