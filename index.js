@@ -1,7 +1,7 @@
 const ServicesChecker = require('firefly-server').ServicesChecker
 
 //const Db = require('firefly-core-libs').MemDb
-const Db = requ_ire('firefly-redis-connector').RedisDb
+const Db = require('firefly-redis-connector').RedisDb
 const discoveryServer = require('firefly-server').httpServer
 
 let url = process.env.REDIS_URL || "redis://localhost:6379"
