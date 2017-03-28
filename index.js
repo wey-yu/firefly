@@ -44,7 +44,7 @@ db.initialize().then((dbCli) => {
       })
 
       server.listen(httpPort);
-      console.log(`🌍 🐝 firefly is started - listening on ${httpPort}`);
+      console.log(`😛 🌍 🐝 firefly is started - listening on ${httpPort}`);
     })
 
 }).catch(error => {
