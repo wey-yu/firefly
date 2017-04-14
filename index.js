@@ -34,13 +34,12 @@ db.initialize().then((dbCli) => {
       let servicesCheker = new ServicesChecker({id:"checker", delay: 5000, dbCli: dbCli})
       servicesCheker.start({task: "check"})
 
-      // WIP 🚧
       servicesCheker.on('error', (discoveryError) => {
         discoveryError.case({
-          BadKeyService:            (message) => console.log("⚠️ bad key of service ", message),
-          ServiceUnreachable:       (message) => console.log("⚠️ unable to reach the service ", message),
-          UnableToDeleteService:    (message) => console.log("⚠️ unable to delete the service ", message),
-          SomethingBadWithService:  (message) => console.log("⚠️ 😡 Huston?", message)
+          BadKeyService: (message) => console.log("⚠️ ===> ", message),
+          ServiceUnreachable: (message) => console.log("⚠️ ===> ", message),
+          UnableToDeleteService: (message) => console.log("⚠️ ===> ", message),
+          SomethingBadWithService: (message) => console.log("⚠️ ===> ", message)
         })
       })
 
