@@ -1,3 +1,4 @@
+const apm = require('elastic-apm-node').start();
 const ServicesChecker = require('firefly-server').ServicesChecker
 
 //const Db = require('firefly-core-libs').MemDb
