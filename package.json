@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/wey-yu/firefly#readme",
   "dependencies": {
+    "appdynamics": "^4.5.23",
     "elastic-apm-node": "^3.5.0",
     "firefly-redis-connector": "git+https://github.com/thespacefirefly/firefly-redis-connector.git",
     "firefly-server": "git+https://github.com/thespacefirefly/firefly-server.git"
