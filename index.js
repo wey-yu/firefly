@@ -1,13 +1,17 @@
-const appdy = require("appdynamics").profile({
- controllerHostName: process.env.APPDYNAMICS_CONTROLLER_HOST_NAME,
- controllerPort: process.env.APPDYNAMICS_CONTROLLER_PORT,
- controllerSslEnabled: process.env.APPDYNAMICS_CONTROLLER_SSL_ENABLED,
- accountName: process.env.APPDYNAMICS_AGENT_ACCOUNT_NAME,
- accountAccessKey: process.env.APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY,
- applicationName: 'firefly',
- tierName: process.env.APP_ID,
- nodeName: process.env.INSTANCE_ID // The controller will automatically append the node name with a unique number
-});
+if (process.env.APPDYNAMICS_CONTROLLER_HOST_NAME)
+  require("appdynamics").profile({
+    controllerHostName: process.env.APPDYNAMICS_CONTROLLER_HOST_NAME,
+    controllerPort: process.env.APPDYNAMICS_CONTROLLER_PORT,
+    controllerSslEnabled: process.env.APPDYNAMICS_CONTROLLER_SSL_ENABLED,
+    accountName: process.env.APPDYNAMICS_AGENT_ACCOUNT_NAME,
+    accountAccessKey: process.env.APPDYNAMICS_AGENT_ACCOUNT_ACCESS_KEY,
+    applicationName:  process.env.APP_NAME || 'firefly',
+    tierName: process.env.APP_ID,
+    nodeName: process.env.INSTANCE_ID // The controller will automatically append the node name with a unique number
+  });
+
+if (process.env.ELASTIC_APM_SERVER_URLS)
+  require("elastic-apm-node").start()
 
 const ServicesChecker = require('firefly-server').ServicesChecker
 
